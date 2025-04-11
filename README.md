@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🪐 Mission: Red Planet
 
-## Getting Started
+## S11 - React (NextJS): Memoization
 
-First, run the development server:
+### 📁 demo-nextjs-Memoization  
+### 📄 S11-Ex
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧪 Ejercicio 1: Filtrado Costoso con `useMemo`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Descripción
+Vas a simular un listado grande de misiones que pueden filtrarse por nombre o por su estado (por ejemplo, “Activa” o “Completada”).  
+El proceso de filtrado será deliberadamente pesado para que notes la mejora cuando uses `useMemo`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### Objetivo
+Usar `useMemo` para **memoizar** la operación de filtrado y evitar que cada pulsación de tecla desencadene todo el proceso de forma innecesaria.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Instrucciones
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Crea un componente `MarsMissionFilter.jsx`.
 
-## Deploy on Vercel
+2. Define un estado `missions` con, por ejemplo, **1000 o más misiones simuladas**.  
+   Puedes usar un bucle para generarlas. Ejemplo:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```jsx
+   const [missions, setMissions] = useState(() => {
+     const temp = [];
+     for (let i = 1; i <= 1000; i++) {
+       temp.push({
+         id: i,
+         name: `Mission #${i}`,
+         status: i % 2 === 0 ? "Activa" : "Completada",
+       });
+     }
+     return temp;
+   });
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   # 🚀 Ejercicio 2: Evitando Re-renders en un Componente Hijo con `useCallback`
+
+## Descripción
+Vas a simular una consola de control de robots exploradores en Marte.  
+Tendrás un componente **padre** que controla el “rover activo” y un componente **hijo** (`RoverDashboard`) que muestra información de ese rover.  
+El padre también maneja otras funciones (por ejemplo, un chat o un cronómetro), que cambian con frecuencia.
+
+---
+
+## Objetivo
+Usar `useCallback` para memoizar una o varias funciones que se pasan como props a un componente hijo memoizado con `React.memo`,  
+evitando **re-renders innecesarios**.
+
+---
+
+## Instrucciones
+
+1. Crea el componente padre `MarsRoverControl.jsx` con un estado para:
+   - El **rover activo** (`roverId`)
+   - Otro estado que **cambie constantemente**, como un cronómetro
+
+2. Define una función para “iniciar un escaneo” en el rover activo, memoizada con `useCallback`:
+
+   ```jsx
+   const startScan = useCallback(() => {
+     console.log(`Iniciando escaneo en el Rover #${roverId}`);
+     // Lógica simulada
+   }, [roverId]);
+
