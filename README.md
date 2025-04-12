@@ -39,7 +39,7 @@ Usar `useMemo` para **memoizar** la operación de filtrado y evitar que cada pul
      }
      return temp;
    });
-   
+
 3. Define también un estado para el término de búsqueda (searchTerm) y otro para el filtro por estado (filterStatus).
 
 4. Implementa una función de filtrado costosa como esta:
@@ -57,7 +57,7 @@ Usar `useMemo` para **memoizar** la operación de filtrado y evitar que cada pul
       return matchTerm && matchStatus;
     });
   }
-
+  ```
 💡 Este bucle interno simula una operación pesada, para apreciar el impacto del memoizado.
 
 5. Usa useMemo para memoizar el resultado del filtro:
@@ -70,6 +70,8 @@ const filteredMissions = useMemo(() => {
 ```
 
 6. Muestra los resultados en un listado e incluye inputs para cambiar searchTerm (por ejemplo, un <input type="text" />) y filterStatus (por ejemplo, un <select> con “Activa”, “Completada” o “Todas”).
+
+---
 
 ### ¿Cómo comprobar la mejora?
  - Observa la consola cuando el filtro se recalcula (puedes añadir un log en el método expensiveFilter).
