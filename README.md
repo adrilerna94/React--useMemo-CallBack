@@ -39,33 +39,41 @@ Usar `useMemo` para **memoizar** la operación de filtrado y evitar que cada pul
      }
      return temp;
    });
+   
+3. Define también un estado para el término de búsqueda (searchTerm) y otro para el filtro por estado (filterStatus).
 
-   # 🚀 Ejercicio 2: Evitando Re-renders en un Componente Hijo con `useCallback`
+4. Implementa una función de filtrado costosa como esta:
 
-## Descripción
-Vas a simular una consola de control de robots exploradores en Marte.  
-Tendrás un componente **padre** que controla el “rover activo” y un componente **hijo** (`RoverDashboard`) que muestra información de ese rover.  
-El padre también maneja otras funciones (por ejemplo, un chat o un cronómetro), que cambian con frecuencia.
+  ```jsx
+  function expensiveFilter(list, searchTerm, status) {
+    // Simulación de trabajo pesado
+    for (let i = 0; i < 500000; i++) {
+      // Operación de relleno
+    }
 
----
+    return list.filter((mission) => {
+      const matchTerm = mission.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchStatus = !status || mission.status === status;
+      return matchTerm && matchStatus;
+    });
+  }
 
-## Objetivo
-Usar `useCallback` para memoizar una o varias funciones que se pasan como props a un componente hijo memoizado con `React.memo`,  
-evitando **re-renders innecesarios**.
+💡 Este bucle interno simula una operación pesada, para apreciar el impacto del memoizado.
 
----
+5. Usa useMemo para memoizar el resultado del filtro:
 
-## Instrucciones
+```jsx
+const filteredMissions = useMemo(() => {
+  console.log("Recalculando filtro...");
+  return expensiveFilter(missions, searchTerm, filterStatus);
+}, [missions, searchTerm, filterStatus]);
+```
 
-1. Crea el componente padre `MarsRoverControl.jsx` con un estado para:
-   - El **rover activo** (`roverId`)
-   - Otro estado que **cambie constantemente**, como un cronómetro
+6. Muestra los resultados en un listado e incluye inputs para cambiar searchTerm (por ejemplo, un <input type="text" />) y filterStatus (por ejemplo, un <select> con “Activa”, “Completada” o “Todas”).
 
-2. Define una función para “iniciar un escaneo” en el rover activo, memoizada con `useCallback`:
+### ¿Cómo comprobar la mejora?
+ - Observa la consola cuando el filtro se recalcula (puedes añadir un log en el método expensiveFilter).
+ - Sin useMemo, cada pulsación en el cuadro de búsqueda disparará todo el filtrado.
+ - Con useMemo, no se recalculará si la dependencia no ha cambiado.
 
-   ```jsx
-   const startScan = useCallback(() => {
-     console.log(`Iniciando escaneo en el Rover #${roverId}`);
-     // Lógica simulada
-   }, [roverId]);
 
