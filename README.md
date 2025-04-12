@@ -69,12 +69,15 @@ const filteredMissions = useMemo(() => {
 }, [missions, searchTerm, filterStatus]);
 ```
 
-6. Mostrar resultados con filtros interactivos
-Implementa una lista que muestre los resultados filtrados, y añade dos elementos de entrada para permitir al usuario cambiar los criterios de búsqueda:
+6. Mostrar resultados con filtros interactivos:
+- Implementa una lista que muestre los resultados filtrados, y añade dos elementos de entrada para permitir al usuario cambiar los criterios de búsqueda:
 
-- Un <input type="text" /> para modificar searchTerm.
+- Un ```<input type="text" />``` para modificar searchTerm.
 
-- Un <select> para modificar filterStatus, con las opciones: Todas, Activa, y Completada.
+- Un ```<select>``` para modificar filterStatus, con las opciones: Todas, Activa, y Completada.
+
+---
+
 
 ### Cómo comprobar la mejora en el rendimiento
 Puedes verificar la optimización usando useMemo de la siguiente forma:
@@ -83,7 +86,7 @@ Puedes verificar la optimización usando useMemo de la siguiente forma:
 
 2. Observa el comportamiento cuando escribes en el cuadro de búsqueda:
 
-  - ❌ Sin useMemo: Cada pulsación en el input ejecutará expensiveFilter, incluso si filterStatus no ha cambiado.
+    - ❌ Sin useMemo: Cada pulsación en el input ejecutará expensiveFilter, incluso si filterStatus no ha cambiado.
 
-  - ✅ Con useMemo: El filtrado solo se recalcula cuando cambien las dependencias (searchTerm o filterStatus), evitando cálculos innecesarios.
+    - ✅ Con useMemo: El filtrado solo se recalcula cuando cambien las dependencias (searchTerm o filterStatus), evitando cálculos innecesarios.
 
