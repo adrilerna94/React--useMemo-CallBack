@@ -82,11 +82,11 @@ const filteredMissions = useMemo(() => {
 ### Cómo comprobar la mejora en el rendimiento
 Puedes verificar la optimización usando useMemo de la siguiente forma:
 
-1. Añade un console.log() dentro de la función expensiveFilter.
+1. Añade un <strong>console.log()</strong> dentro de la función expensiveFilter.
 
 2. Observa el comportamiento cuando escribes en el cuadro de búsqueda:
 
-    - ❌ Sin useMemo: Cada pulsación en el input ejecutará expensiveFilter, incluso si filterStatus no ha cambiado.
+    - ❌ <strong> Sin useMemo: </strong> Cada pulsación en el input ejecutará expensiveFilter, incluso si filterStatus no ha cambiado.
 
-    - ✅ Con useMemo: El filtrado solo se recalcula cuando cambien las dependencias (searchTerm o filterStatus), evitando cálculos innecesarios.
+    - ✅ <strong>Con useMemo:</strong> El filtrado solo se recalcula cuando cambien las dependencias (searchTerm o filterStatus), evitando cálculos innecesarios.
 
