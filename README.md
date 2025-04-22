@@ -90,3 +90,45 @@ Puedes verificar la optimización usando useMemo de la siguiente forma:
 
     - ✅ <strong>Con useMemo:</strong> El filtrado solo se recalcula cuando cambien las dependencias (searchTerm o filterStatus), evitando cálculos innecesarios.
 
+## Ejercicio 2: Evitando Re-renders en un Componente Hijo con useCallback
+
+### 🧠 Descripción
+Vas a simular una consola de control de robots exploradores en Marte. Tendrás un componente padre que controla el rover activo y un componente hijo (por ejemplo, RoverDashboard) que muestra información de ese rover. El componente padre también maneja otras funciones (como un chat o un cronómetro), que cambian con frecuencia.
+
+### 🎯 Objetivo
+Usar useCallback para memoizar una o varias funciones que se pasan como props a un componente hijo memoizado con React.memo, evitando re-renders innecesarios.
+
+### 🛠️ Instrucciones
+1. Crea el componente padre MarsRoverControl.jsx con:
+
+- Un estado para el rover activo (roverId).
+- Otro estado para algún elemento que cambie constantemente (por ejemplo, un cronómetro).
+
+2. Define una función para iniciar un escaneo en el rover activo, como esta:
+
+```jsx
+const startScan = useCallback(() => {
+  console.log(`Iniciando escaneo en el Rover #${roverId}`);
+  // Lógica simulada
+}, [roverId]);
+```
+3. Renderiza varios botones que permitan cambiar el roverId, por ejemplo: "Rover #1","Rover #2","Rover #3",etc.
+
+4. Renderiza el componente hijo ``<RoverDashboard />`` y pásale las props ``onStartScan`` (función memoizada) y ``roverId``.
+
+5. En RoverDashboard.jsx:
+
+- Envuelve el componente en React.memo.
+
+- Recibe las props roverId y onStartScan.
+
+- Muestra un mensaje en consola en cada render para verificar si el componente se ha vuelto a renderizar:
+
+```jsx 
+console.log("Renderizando RoverDashboard..."); 
+```
+---
+
+### ✅ ¿Cómo comprobar la mejora?
+- <strong> Sin </strong> ``useCallback``: cada cambio en el cronómetro del componente padre genera una nueva referencia de la función startScan, lo que forzará el re-render del hijo.
+- <strong> Con </strong> ``useCallback``: la referencia se mantiene estable mientras roverId no cambie, y el componente hijo no se re-renderiza innecesariamente.

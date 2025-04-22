@@ -11,9 +11,14 @@ import {
   ListItem,
   Spinner,
   Input,
+  Chip,
+  Option,
+  Select,
 } from '@material-tailwind/react';
 
 export {
+  Option,
+  Select,
   Typography,
   Card,
   CardHeader,
@@ -24,4 +29,5 @@ export {
   ListItem,
   Spinner,
   Input,
+  Chip,
 };
