@@ -101,8 +101,8 @@ Usar useCallback para memoizar una o varias funciones que se pasan como props a 
 ### 🛠️ Instrucciones
 1. Crea el componente padre MarsRoverControl.jsx con:
 
-- Un estado para el rover activo (roverId).
-- Otro estado para algún elemento que cambie constantemente (por ejemplo, un cronómetro).
+  - Un estado para el rover activo (roverId).
+  - Otro estado para algún elemento que cambie constantemente (por ejemplo, un cronómetro).
 
 2. Define una función para iniciar un escaneo en el rover activo, como esta:
 
@@ -118,11 +118,11 @@ const startScan = useCallback(() => {
 
 5. En RoverDashboard.jsx:
 
-- Envuelve el componente en React.memo.
+  - Envuelve el componente en React.memo.
 
-- Recibe las props roverId y onStartScan.
+  - Recibe las props roverId y onStartScan.
 
-- Muestra un mensaje en consola en cada render para verificar si el componente se ha vuelto a renderizar:
+  - Muestra un mensaje en consola en cada render para verificar si el componente se ha vuelto a renderizar:
 
 ```jsx 
 console.log("Renderizando RoverDashboard..."); 
